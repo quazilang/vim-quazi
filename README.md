@@ -1,4 +1,4 @@
-# Quazi for Neovim
+# Quazi for Neovim and Vim
 
 Neovim 0.11+ integration for `.qz` files and the contained Quazi language
 server. It uses Neovim's built-in LSP configuration API; `nvim-lspconfig` is
@@ -37,3 +37,12 @@ nvim --headless -u NONE -i NONE -c 'luafile tests/lsp-smoke.lua' -c qa
 local development when the compiler is not installed on `PATH`; normal editor
 use continues to launch `qz lsp`. The command above uses POSIX environment
 syntax; set the same variable with your shell's platform-specific syntax.
+
+## Vim support
+
+Ordinary Vim does not implement Neovim's built-in LSP API, but this package
+also supports Vim 8+ through [vim-lsp](https://github.com/prabirshrestha/vim-lsp).
+Install `vim-lsp` and this package, ensuring `vim-lsp` is loaded first. The
+Vim adapter assigns the `quazi` filetype to `.qz` files and registers `qz lsp`.
+It honors the same `QUAZI_LSP_COMMAND` override. Completion mappings and UI
+preferences belong to the user's `vim-lsp` configuration.
