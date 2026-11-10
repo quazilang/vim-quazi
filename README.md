@@ -33,6 +33,19 @@ NVIM_LOG_FILE=/tmp/nvim-quazi.log \
 nvim --headless -u NONE -i NONE -c 'luafile tests/lsp-smoke.lua' -c qa
 ```
 
+The Unicode and formatting protocol check uses the same setup. Through
+Neovim's own LSP client it sends incremental edits next to non-BMP text
+(`λ🙂 你好🎉`), compares the server's diagnostic and hover positions with
+Neovim's UTF-16 indexes, and requires whole-document formatting to equal
+`qz fmt` output for the same text:
+
+```bash
+QUAZI_LSP_COMMAND=/absolute/path/to/qz \
+XDG_STATE_HOME=/tmp/nvim-quazi-state \
+NVIM_LOG_FILE=/tmp/nvim-quazi.log \
+nvim --headless -u NONE -i NONE -c 'luafile tests/lsp-unicode.lua' -c qa
+```
+
 `QUAZI_LSP_COMMAND` accepts the path to one executable, so it is useful during
 local development when the compiler is not installed on `PATH`; normal editor
 use continues to launch `qz lsp`. The command above uses POSIX environment
